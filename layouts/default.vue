@@ -1,16 +1,21 @@
 <template>
   <v-app>
-    <v-app-bar app clipped-left dark color="blue">
-      <span class="title ml-3 mr-7">
+    <v-app-bar app dark color="primary">
+      <span class="title mr-3">
         ZZAT
       </span>
+      <div class="flex-grow-1"></div>
       <v-text-field
         solo-inverted
         flat
         hide-details
-        prepend-inner-icon="search"
+        append-icon="search"
         label="Search"
       ></v-text-field>
+      <div class="flex-grow-1"></div>
+      <v-avatar class="ml-3" color="grey lighten-4">
+        <v-icon color="accent">person</v-icon>
+      </v-avatar>
     </v-app-bar>
     <v-content>
       <v-container fluid>
@@ -19,7 +24,3 @@
     </v-content>
   </v-app>
 </template>
-
-<script>
-export default {}
-</script>

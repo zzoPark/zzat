@@ -1,41 +1,49 @@
 <template>
-  <v-content>
-    <v-container class="fill-height" fluid>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="4">
-          <v-card class="elevation-12">
-            <v-toolbar color="primary" dark flat>
-              <v-toolbar-title>Login</v-toolbar-title>
-            </v-toolbar>
-            <v-card-text>
-              <v-form>
-                <v-text-field
-                  label="Login"
-                  name="login"
-                  prepend-icon="person"
-                  type="text"
-                ></v-text-field>
-                <v-text-field
-                  label="Password"
-                  name="password"
-                  prepend-icon="lock"
-                  type="password"
-                ></v-text-field>
-              </v-form>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary">Login</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-content>
+  <v-row justify="center">
+    <v-col v-for="(room, i) in rooms" :key="i">
+      <div class="flex-grow-1"></div>
+      <v-hover v-slot:default="{ hover }">
+        <v-card :elevation="hover ? 5 : 1" @click="dosomething">
+          <v-list-item two-line>
+            <v-list-item-avatar>
+              <v-icon>chat</v-icon>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="room.title" />
+              <v-chip-group multiple column>
+                <v-chip v-for="tag in room.tags" :key="tag">
+                  {{ tag }}
+                </v-chip>
+              </v-chip-group>
+            </v-list-item-content>
+          </v-list-item>
+        </v-card>
+      </v-hover>
+      <div class="flex-grow-1"></div>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 export default {
-  layout: 'login'
+  data() {
+    return {
+      rooms: [
+        {
+          title: 'Chat Room 1',
+          tags: ['chat', 'room', 'room1', 'zzo']
+        },
+        {
+          title: 'Chat Room 2',
+          tags: ['chat', 'room', 'room2', 'zzo']
+        }
+      ]
+    }
+  },
+  methods: {
+    dosomething() {
+      alert('Do Something')
+    }
+  }
 }
 </script>
