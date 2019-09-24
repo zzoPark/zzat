@@ -1,20 +1,23 @@
 <template>
   <v-row align="center" justify="center">
-    <v-col cols="12" sm="8" md="4">
-      <v-card class="elevation-12">
-        <v-toolbar color="primary" dark flat>
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
+    <v-col sm="12" md="3">
+      <v-card>
+        <v-card-title>
+          <span class="primary--text font-weight-black">ZZAT</span>
+          <v-spacer />
+          <v-icon color="primary">chat_bubble</v-icon>
+          <v-icon color="primary">chat</v-icon>
+        </v-card-title>
         <v-card-text>
           <v-form>
             <v-text-field
-              label="Login"
+              label="USERNAME"
               name="login"
               prepend-icon="person"
               type="text"
             ></v-text-field>
             <v-text-field
-              label="Password"
+              label="PASSWORD"
               name="password"
               prepend-icon="lock"
               type="password"
@@ -22,8 +25,10 @@
           </v-form>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary">Login</v-btn>
+          <div class="flex-grow-1"></div>
+          <v-btn color="primary" dark depressed>SIGN IN</v-btn>
+          <v-btn color="primary" outlined>SIGN UP</v-btn>
+          <div class="flex-grow-1"></div>
         </v-card-actions>
       </v-card>
     </v-col>

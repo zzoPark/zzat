@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-app-bar app dark color="primary">
-      <span class="title mr-3">
+      <span class="title font-weight-black mr-3">
         ZZAT
       </span>
       <div class="flex-grow-1"></div>
@@ -13,8 +13,8 @@
         label="Search"
       ></v-text-field>
       <div class="flex-grow-1"></div>
-      <v-avatar class="ml-3" color="grey lighten-4">
-        <v-icon color="accent">person</v-icon>
+      <v-avatar class="ml-3" color="accent">
+        <v-icon large>person</v-icon>
       </v-avatar>
     </v-app-bar>
     <v-content>

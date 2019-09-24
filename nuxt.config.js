@@ -24,7 +24,8 @@ module.exports = {
     '@nuxtjs/vuetify'
   ],
   modules: [
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/dotenv'
   ],
   /*
    ** Axios module configuration
@@ -37,6 +38,15 @@ module.exports = {
    */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    theme: {
+      themes: {
+        light: {
+          primary: colors.lightBlue,
+          secondary: colors.amber.lighten4,
+          accent: colors.amber
+        }
+      }
+    },
     defaultAssets: {
       icons: 'md'
     }
