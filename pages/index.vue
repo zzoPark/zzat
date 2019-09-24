@@ -39,22 +39,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data() {
-    return {
-      rooms: [
-        {
-          title: 'Chat Room 1',
-          tags: ['chat', 'room', 'room1', 'zzo'],
-          people: 15
-        },
-        {
-          title: 'Chat Room 2',
-          tags: ['chat', 'room', 'room2', 'zzo'],
-          people: 20
-        }
-      ]
-    }
+  computed: mapGetters({
+    rooms: 'rooms/get'
+  }),
+  async fetch({ store, params }) {
+    await store.dispatch('rooms/fetch')
   },
   methods: {
     dosomething() {
