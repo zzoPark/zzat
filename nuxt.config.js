@@ -1,4 +1,6 @@
+require('dotenv').config()
 const colors = require('vuetify/es5/util/colors').default
+const session = require('express-session')
 
 module.exports = {
   mode: 'universal',
@@ -16,6 +18,9 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  serverMiddleware: [
+    { path: '/api', handler: '~/server/api' }
+  ],
   loading: { color: '#fff' },
   css: [],
   plugins: [],
@@ -43,7 +48,18 @@ module.exports = {
         light: {
           primary: colors.lightBlue,
           secondary: colors.amber.lighten4,
-          accent: colors.amber
+          accent: colors.amber,
+          info: colors.blueGrey.lighten1,
+          online: colors.green,
+          offline: colors.red
+        },
+        dark: {
+          primary: colors.blue,
+          secondary: colors.amber.lighten4,
+          accent: colors.amber,
+          info: colors.blueGrey.lighten1,
+          online: colors.green,
+          offline: colors.red
         }
       }
     },
