@@ -23,6 +23,10 @@ module.exports = (server, sessionMiddleware) => {
       console.log(`${sessionId} left room ${data}!`)
       socket.emit('news', { left: `room ${data}` })
     })
+
+    socket.on('send message', (data) => {
+      socket.to(data.room).emit('recieve message', data)
+    })
     
     socket.on('error', (error) => {
       console.error(error)

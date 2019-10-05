@@ -1,30 +1,37 @@
 <template>
   <v-layout>
     <v-flex class="text-center">
-      <span>{{ message }} </span>
+      <p v-for="(msg, i) in messages" :key="i">{{ msg.content }}</p>
+      <v-btn @click="add()">Add</v-btn>
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import socket from '~/plugins/socket.io.js'
+import { mapGetters } from 'vuex'
 
 export default {
+  computed: mapGetters({
+    messages: 'messages/get'
+  }),
   asyncData({ params }) {
     return {
-      roomId: params.id,
-      message: ''
+      roomId: params.id
     }
   },
-  beforeMount() {
-    socket.emit('join room', this.roomId)
-    socket.on('news', (data) => {
-      this.message = data
-    })
+  async fetch({ store, params }) {
+    await store.dispatch('messages/fetch')
   },
-  beforeRouteLeave(to, from, next) {
-    socket.emit('leave room', this.roomId)
-    next()
+  methods: {
+    add() {
+      const message = {
+        id: 3,
+        room: 1,
+        username: 'zzo',
+        content: 'some message'
+      }
+      this.$store.dispatch('messages/send', message)
+    }
   }
 }
 </script>
