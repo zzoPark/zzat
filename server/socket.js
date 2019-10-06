@@ -1,10 +1,10 @@
-module.exports = (server, sessionMiddleware) => {
+module.exports = (server, session) => {
   const io = require('socket.io')(server)
 
   // Give session middleware to socket.io
   // Now we can use socket.request.session
   io.use((socket, next) => {
-    sessionMiddleware(socket.request, socket.request.res || {}, next)
+    session(socket.request, socket.request.res || {}, next)
   })
   
   // Dealing with events
@@ -15,13 +15,11 @@ module.exports = (server, sessionMiddleware) => {
     socket.on('join room', (data) => {
       socket.join(data)
       console.log(`${sessionId} joined room ${data}!`)
-      socket.emit('news', { joined: `room ${data}` })
     })
 
     socket.on('leave room', (data) => {
       socket.leave(data)
       console.log(`${sessionId} left room ${data}!`)
-      socket.emit('news', { left: `room ${data}` })
     })
 
     socket.on('send message', (data) => {

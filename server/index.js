@@ -1,7 +1,7 @@
 const { Nuxt, Builder } = require('nuxt')
 const app = require('express')()
-const session = require('express-session')
 const server = require('http').createServer(app)
+const session = require('./session')
 const socket = require('./socket')
 const consola = require('consola')
 
@@ -23,26 +23,14 @@ async function start() {
     await nuxt.ready()
   }
 
-  // Define session middleware
-  // It will be shared between express & socket.io
-  const sessionMiddleware = session({
-    secret: process.env.COOKIE_SECRET || 'secret_key',
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: false
-    }
-  })
-
   // Give session middleware to express
-  app.use(sessionMiddleware)
+  app.use(session)
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
 
-  // Connect the socket.io
-  socket(server, sessionMiddleware)
+  // Connect the socket.io with session
+  socket(server, session)
 
   // Listen the server
   server.listen(port, host)

@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" align="start" class="fill-height">
     <v-col v-for="(room, i) in rooms" :key="i">
       <room :room="room" />
     </v-col>

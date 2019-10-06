@@ -1,19 +1,26 @@
 export const state = () => ({
-  list: []
+  list: [],
+  current: {}
 })
 
 export const getters = {
   get(state) {
     return state.list
+  },
+  current(state) {
+    return state.current
   }
 }
 
 export const mutations = {
-  set(state, rooms) {
-    state.list = rooms
+  set(state, list) {
+    state.list = list
   },
-  add(state, room) {
-    state.list.push(room)
+  add(state, item) {
+    state.list.push(item)
+  },
+  join(state, id) {
+    state.current = state.list.find((it) => it.id === id)
   }
 }
 
@@ -34,5 +41,8 @@ export const actions = {
       }
     ]
     commit('set', rooms)
+  },
+  join({ state, commit }, data) {
+    commit('join', data)
   }
 }
