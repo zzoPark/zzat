@@ -18,9 +18,7 @@
       </v-avatar>
     </v-app-bar>
     <v-content>
-      <v-container fluid class="fill-height">
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
   </v-app>
 </template>
