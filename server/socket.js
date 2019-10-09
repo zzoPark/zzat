@@ -12,18 +12,18 @@ module.exports = (server, session) => {
     const sessionId = socket.request.sessionID
     console.log(`${sessionId} connected!`)
 
-    socket.on('join room', (data) => {
-      socket.join(data)
-      console.log(`${sessionId} joined room ${data}!`)
+    socket.on('join room', (room) => {
+      socket.join(room.id)
+      console.log(`${sessionId} joined room ${room.title}!`)
     })
 
-    socket.on('leave room', (data) => {
-      socket.leave(data)
-      console.log(`${sessionId} left room ${data}!`)
+    socket.on('leave room', (room) => {
+      socket.leave(room.id)
+      console.log(`${sessionId} left room ${room.title}!`)
     })
 
-    socket.on('send message', (data) => {
-      socket.to(data.room).emit('recieve message', data)
+    socket.on('send message', (message) => {
+      socket.to(message.room).emit('recieve message', message)
     })
     
     socket.on('error', (error) => {

@@ -13,6 +13,9 @@ import { mapGetters } from 'vuex'
 import Room from '~/components/Room'
 
 export default {
+  head: {
+    title: 'Home'
+  },
   components: {
     Room
   },

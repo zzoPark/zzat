@@ -1,6 +1,6 @@
 export const state = () => ({
   list: [],
-  current: {}
+  current: null
 })
 
 export const getters = {
@@ -19,22 +19,27 @@ export const mutations = {
   add(state, item) {
     state.list.push(item)
   },
-  join(state, id) {
-    state.current = state.list.find((it) => it.id === id)
+  join(state, item) {
+    state.current = item
+  },
+  leave(state, item) {
+    state.current = null
   }
 }
 
 export const actions = {
-  fetch({ state, commit }) {
+  fetch({ commit }) {
     const rooms = [
       {
         id: 1,
+        url: 'room1',
         title: 'Chat Room 1',
         tags: ['chat', 'room', 'room1', 'zzo'],
         people: 15
       },
       {
         id: 2,
+        url: 'room2',
         title: 'Chat Room 2',
         tags: ['chat', 'room', 'room2', 'zzo'],
         people: 20
@@ -42,7 +47,14 @@ export const actions = {
     ]
     commit('set', rooms)
   },
-  join({ state, commit }, data) {
-    commit('join', data)
+  join({ state, commit }, url) {
+    const room = state.list.find((it) => it.url === url)
+    commit('join', room)
+  },
+  leave({ state, commit }, room) {
+    commit('leave', room)
+  },
+  exists({ state }, url) {
+    return state.list.some((it) => it.url === url)
   }
 }

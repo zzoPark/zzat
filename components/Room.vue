@@ -20,7 +20,7 @@
             {{ room.people }}
             <v-icon small color="online">people</v-icon>
           </v-list-item-action-text>
-          <v-btn outlined color="primary" :to="`rooms/${room.id}`">
+          <v-btn outlined color="primary" :to="`rooms/${room.url}`">
             JOIN
           </v-btn>
         </v-list-item-action>

@@ -1,9 +1,12 @@
+// Use variables from .env file
 require('dotenv').config()
+// Use vuetify javascript color pack
 const colors = require('vuetify/es5/util/colors').default
-const session = require('express-session')
 
 module.exports = {
+  // Server-side rendering + client-side navigation
   mode: 'universal',
+  // Set default HTML Head tags
   head: {
     titleTemplate: '%s - ' + process.env.npm_package_name,
     title: process.env.npm_package_name || '',
@@ -18,16 +21,18 @@ module.exports = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
+  // Server-side middlewares (run before vue-server-renderer)
   serverMiddleware: [
     { path: '/api', handler: '~/server/api' }
   ],
+  // Set loading progress bar
   loading: { color: '#fff' },
-  css: [],
-  plugins: [],
+  // Modules only required during development and build time
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
+  // Modules required
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/dotenv'

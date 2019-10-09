@@ -1,7 +1,7 @@
 <template>
   <v-card outlined color="secondary">
     <v-card-text class="body-2 font-weight-bold pb-0">
-      {{ message.content }}
+      <span class="pre-formatted">{{ message.content }}</span>
     </v-card-text>
     <v-card-actions>
       <v-list-item class="px-2" dense>
@@ -22,6 +22,12 @@
     </v-card-actions>
   </v-card>
 </template>
+
+<style>
+.pre-formatted {
+  white-space: pre;
+}
+</style>
 
 <script>
 export default {
