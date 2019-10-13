@@ -22,21 +22,13 @@ module.exports = {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
   // Server-side middlewares (run before vue-server-renderer)
-  serverMiddleware: [
-    { path: '/api', handler: '~/server/api' }
-  ],
+  serverMiddleware: [{ path: '/api', handler: '~/api' }],
   // Set loading progress bar
   loading: { color: '#fff' },
   // Modules only required during development and build time
-  buildModules: [
-    '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
-  ],
+  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
   // Modules required
-  modules: [
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
-  ],
+  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options

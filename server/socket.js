@@ -6,7 +6,7 @@ module.exports = (server, session) => {
   io.use((socket, next) => {
     session(socket.request, socket.request.res || {}, next)
   })
-  
+
   // Dealing with events
   io.on('connection', (socket) => {
     const sessionId = socket.request.sessionID
@@ -25,11 +25,11 @@ module.exports = (server, session) => {
     socket.on('send message', (message) => {
       socket.to(message.room).emit('recieve message', message)
     })
-    
+
     socket.on('error', (error) => {
       console.error(error)
     })
- 
+
     socket.on('disconnect', () => {
       console.log(`${sessionId} disconnected!`)
     })

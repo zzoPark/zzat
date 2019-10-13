@@ -1,15 +1,18 @@
-const { Nuxt, Builder } = require('nuxt')
 const app = require('express')()
 const server = require('http').createServer(app)
+const { Nuxt, Builder } = require('nuxt')
+
+const logger = require('morgan')
+const consola = require('consola')
+const config = require('../nuxt.config.js')
+const connect = require('./connect')
 const session = require('./session')
 const socket = require('./socket')
-const consola = require('consola')
 
 // Import and Set Nuxt.js options
-const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
-async function start() {
+const start = async () => {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
@@ -22,6 +25,12 @@ async function start() {
   } else {
     await nuxt.ready()
   }
+
+  // Connect to MongoDB with mongoose
+  connect()
+
+  // Use morgan to log every request
+  app.use(logger('dev'))
 
   // Give session middleware to express
   app.use(session)
@@ -40,4 +49,5 @@ async function start() {
     badge: true
   })
 }
+
 start()
