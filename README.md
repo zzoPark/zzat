@@ -1,6 +1,6 @@
 # zzochat
 
-> My ultimate Nuxt.js project
+> A chatting web application.
 
 ## Build Setup
 
