@@ -37,6 +37,6 @@
 
 <script>
 export default {
-  layout: 'login'
+  layout: "login",
 }
 </script>

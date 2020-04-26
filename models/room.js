@@ -3,7 +3,7 @@ const { Schema } = mongoose
 
 const roomSchema = new Schema(
   {
-    url: {
+    slug: {
       type: String,
       required: true,
       unique: true
@@ -15,6 +15,10 @@ const roomSchema = new Schema(
     tags: {
       type: [String],
       index: true
+    },
+    description: {
+      type: String,
+      default: ''
     },
     people: {
       type: Number,

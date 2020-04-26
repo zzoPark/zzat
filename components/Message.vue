@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <v-card outlined color="secondary">
     <v-card-text class="body-2 font-weight-bold pb-0">
@@ -35,9 +37,9 @@ export default {
     message: {
       type: Object,
       default() {
-        return { content: 'There is no message!' }
-      }
-    }
-  }
+        return { content: "There is no message!" }
+      },
+    },
+  },
 }
 </script>

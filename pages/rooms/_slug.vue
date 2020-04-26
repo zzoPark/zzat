@@ -31,48 +31,43 @@
 </template>
 
 <style>
-textarea[name='content'] {
+textarea[name="content"] {
   margin-top: 0 !important;
 }
 </style>
 
 <script>
-import { mapGetters } from 'vuex'
-import Message from '~/components/Message'
+import { mapGetters } from "vuex"
+import Message from "~/components/Message"
 
 export default {
   async validate({ params, store }) {
-    const isAlphanumeric = /^[a-zA-Z0-9_]+$/.test(params.url)
+    const isAlphanumeric = /^[a-zA-Z0-9_]+$/.test(params.slug)
     if (!isAlphanumeric) return false
-    const exists = await store.dispatch('rooms/exists', params.url)
+    const exists = await store.dispatch("rooms/exists", params.slug)
     return exists
   },
   components: {
-    Message
+    Message,
   },
-  head() {
-    return {
-      title: this.currentRoom ? this.currentRoom.title : ''
-    }
+  async fetch({ store, params }) {
+    await store.dispatch("rooms/join", params.slug)
+    await store.dispatch("messages/fetch")
   },
   data() {
     return {
-      content: '',
-      footerHeight: 0
+      content: "",
+      footerHeight: 0,
     }
   },
   computed: {
     ...mapGetters({
-      messages: 'messages/get',
-      currentRoom: 'rooms/current'
+      messages: "messages/get",
+      currentRoom: "rooms/current",
     }),
     messagesMargin() {
-      return { marginBottom: this.footerHeight + 'px' }
-    }
-  },
-  async fetch({ store, params }) {
-    await store.dispatch('rooms/join', params.url)
-    await store.dispatch('messages/fetch')
+      return { marginBottom: this.footerHeight + "px" }
+    },
   },
   mounted() {
     this.setFooterHeight()
@@ -82,18 +77,18 @@ export default {
     this.setFooterHeight()
   },
   beforeRouteLeave(to, from, next) {
-    this.$store.dispatch('rooms/leave', this.currentRoom)
+    this.$store.dispatch("rooms/leave", this.currentRoom)
     next()
   },
   methods: {
     send() {
       const message = {
         room: this.currentRoom.id,
-        username: 'zzo',
+        username: "zzo",
         content: this.content,
-        created: '2019-10-02 00:00:00'
+        created: "2019-10-02 00:00:00",
       }
-      this.$store.dispatch('messages/send', message)
+      this.$store.dispatch("messages/send", message)
     },
     scrollToEnd() {
       const container = this.$refs.messages
@@ -101,7 +96,10 @@ export default {
     },
     setFooterHeight() {
       this.footerHeight = this.$refs.sender.$el.clientHeight
-    }
-  }
+    },
+  },
+  head() {
+    return this.$getRoomHead(this.currentRoom || {})
+  },
 }
 </script>

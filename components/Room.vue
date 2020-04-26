@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <template>
   <v-hover v-slot:default="{ hover }">
     <v-card :elevation="hover ? 5 : 2">
@@ -20,7 +22,7 @@
             {{ room.people }}
             <v-icon small color="online">people</v-icon>
           </v-list-item-action-text>
-          <v-btn outlined color="primary" :to="`rooms/${room.url}`">
+          <v-btn outlined color="primary" nuxt :to="`rooms/${room.slug}`">
             JOIN
           </v-btn>
         </v-list-item-action>
@@ -35,9 +37,9 @@ export default {
     room: {
       type: Object,
       default() {
-        return { title: 'There is no room!' }
-      }
-    }
-  }
+        return { title: "There is no room!" }
+      },
+    },
+  },
 }
 </script>

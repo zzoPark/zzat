@@ -1,6 +1,6 @@
 export const state = () => ({
   list: [],
-  current: null
+  current: null,
 })
 
 export const getters = {
@@ -9,7 +9,7 @@ export const getters = {
   },
   current(state) {
     return state.current
-  }
+  },
 }
 
 export const mutations = {
@@ -24,37 +24,31 @@ export const mutations = {
   },
   leave(state, item) {
     state.current = null
-  }
+  },
 }
 
 export const actions = {
-  fetch({ commit }) {
-    const rooms = [
-      {
-        id: 1,
-        url: 'room1',
-        title: 'Chat Room 1',
-        tags: ['chat', 'room', 'room1', 'zzo'],
-        people: 15
-      },
-      {
-        id: 2,
-        url: 'room2',
-        title: 'Chat Room 2',
-        tags: ['chat', 'room', 'room2', 'zzo'],
-        people: 20
-      }
-    ]
-    commit('set', rooms)
+  async fetch({ commit }) {
+    const rooms = await this.$axios.$get("rooms")
+    commit("set", rooms)
   },
-  join({ state, commit }, url) {
-    const room = state.list.find((it) => it.url === url)
-    commit('join', room)
+  join({ state, commit }, slug) {
+    const room = state.list.find((it) => it.slug === slug)
+    commit("join", room)
   },
   leave({ state, commit }, room) {
-    commit('leave', room)
+    commit("leave", room)
   },
-  exists({ state }, url) {
-    return state.list.some((it) => it.url === url)
-  }
+  async exists({ state }, slug) {
+    try {
+      const res = await this.$axios.head(`rooms/${slug}`)
+      return res.status === 200
+    } catch (err) {
+      return false
+    }
+  },
+  async add({ commit }, room) {
+    const newRoom = await this.$axios.$post("rooms", room)
+    commit("add", newRoom)
+  },
 }

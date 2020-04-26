@@ -2,7 +2,6 @@ const app = require('express')()
 const server = require('http').createServer(app)
 const { Nuxt, Builder } = require('nuxt')
 
-const logger = require('morgan')
 const consola = require('consola')
 const config = require('../nuxt.config.js')
 const connect = require('./connect')
@@ -28,9 +27,6 @@ const start = async () => {
 
   // Connect to MongoDB with mongoose
   connect()
-
-  // Use morgan to log every request
-  app.use(logger('dev'))
 
   // Give session middleware to express
   app.use(session)

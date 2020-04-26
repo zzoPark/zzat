@@ -16,12 +16,13 @@ router.get('/rooms', async (req, res) => {
 router.post('/rooms', async (req, res) => {
   try {
     const room = new Room({
-      url: req.body.url,
+      slug: req.body.slug,
       title: req.body.title,
-      tags: req.body.tags
+      tags: req.body.tags,
+      description: req.body.description
     })
     const newRoom = await room.save()
-    res.location(`/rooms/${newRoom.url}`)
+    res.location(`/rooms/${newRoom.slug}`)
     res.status(201).json(newRoom)
   } catch (error) {
     console.error(error)
@@ -29,9 +30,9 @@ router.post('/rooms', async (req, res) => {
   }
 })
 
-router.head('/rooms/:url', async (req, res) => {
+router.head('/rooms/:slug', async (req, res) => {
   try {
-    const exists = await Room.exists({ url: req.params.url })
+    const exists = await Room.exists({ slug: req.params.slug })
     if (exists) {
       res.status(200).end()
     } else {
@@ -43,9 +44,9 @@ router.head('/rooms/:url', async (req, res) => {
   }
 })
 
-router.get('/rooms/:url', async (req, res) => {
+router.get('/rooms/:slug', async (req, res) => {
   try {
-    const room = await Room.findOne({ url: req.params.url })
+    const room = await Room.findOne({ slug: req.params.slug })
     res.json(room)
   } catch (error) {
     console.error(error)
@@ -56,9 +57,10 @@ router.get('/rooms/:url', async (req, res) => {
 router.put('/rooms/:id', async (req, res) => {
   try {
     await Room.findByIdAndUpdate(req.params.id, {
-      url: req.body.url,
+      slug: req.body.slug,
       title: req.body.title,
-      tags: req.body.tags
+      tags: req.body.tags,
+      description: req.body.description
     })
     res.sendStatus(200)
   } catch (error) {
