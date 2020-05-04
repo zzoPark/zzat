@@ -1,5 +1,6 @@
 module.exports = (server, session) => {
   const io = require('socket.io')(server)
+  const Message = require('../models/message')
 
   // Give session middleware to socket.io
   // Now we can use socket.request.session
@@ -22,8 +23,12 @@ module.exports = (server, session) => {
       console.log(`${sessionId} left room ${room.title}!`)
     })
 
-    socket.on('send message', (message) => {
-      socket.to(message.room).emit('recieve message', message)
+    socket.on('send message', async (message) => {
+      console.debug(message)
+      const newMessage = new Message(message)
+      await newMessage.save()
+      console.debug(newMessage)
+      socket.to(newMessage.room).emit('recieve message', newMessage)
     })
 
     socket.on('error', (error) => {

@@ -31,6 +31,8 @@ module.exports = {
   // Set loading progress bar
   loading: { color: '#fff' },
 
+  plugins: [ '~/plugins/head.js', '~/plugins/moment.js' ],
+
   // Modules only required during development and build time
   buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
 

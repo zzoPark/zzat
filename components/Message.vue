@@ -12,12 +12,12 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>
-            {{ message.username }}
+            {{ message.user }}
           </v-list-item-title>
         </v-list-item-content>
         <v-list-item-action>
           <v-list-item-action-text class="caption">
-            {{ message.created }}
+            {{ $formatDate(message.createdAt) }}
           </v-list-item-action-text>
         </v-list-item-action>
       </v-list-item>

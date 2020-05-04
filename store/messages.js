@@ -18,21 +18,8 @@ export const mutations = {
 }
 
 export const actions = {
-  fetch({ state, commit }) {
-    const messages = [
-      {
-        room: 1,
-        username: "zzo",
-        content: "Hi! Nice to meet you!",
-        created: "2019-10-01 10:00:00",
-      },
-      {
-        room: 1,
-        username: "zzo",
-        content: "Hello!",
-        created: "2019-10-01 10:05:00",
-      },
-    ]
+  async fetch({ state, commit }) {
+    const messages = await this.$axios.$get("messages")
     commit("set", messages)
   },
   send({ state, commit }, message) {

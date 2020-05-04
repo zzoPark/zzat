@@ -32,8 +32,8 @@ export const actions = {
     const rooms = await this.$axios.$get("rooms")
     commit("set", rooms)
   },
-  join({ state, commit }, slug) {
-    const room = state.list.find((it) => it.slug === slug)
+  async join({ state, commit }, slug) {
+    const room = await this.$axios.$get(`rooms/${slug}`)
     commit("join", room)
   },
   leave({ state, commit }, room) {

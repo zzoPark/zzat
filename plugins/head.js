@@ -1,6 +1,6 @@
 export default ({ app }, inject) => {
   const getHead = (title = "", description = "") => ({
-    title: title,
+    title,
     meta: [{ hid: "description", name: "description", content: description }],
   })
 

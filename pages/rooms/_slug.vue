@@ -1,5 +1,6 @@
 <template>
   <v-container ref="container" fluid>
+    <span>{{ currentRoom }}</span>
     <v-container ref="messages" :style="messagesMargin">
       <v-row v-for="(msg, i) in messages" :key="i" justify="center">
         <v-col cols="11" md="6">
@@ -83,10 +84,9 @@ export default {
   methods: {
     send() {
       const message = {
-        room: this.currentRoom.id,
-        username: "zzo",
+        room: this.currentRoom._id,
+        user: "zzo",
         content: this.content,
-        created: "2019-10-02 00:00:00",
       }
       this.$store.dispatch("messages/send", message)
     },

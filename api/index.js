@@ -6,6 +6,7 @@ const roomsRouter = require('./rooms')
 const messagesRouter = require('./messages')
 
 router.use(logger('dev'))
+router.use(express.json())
 router.use(roomsRouter)
 router.use(messagesRouter)
 
