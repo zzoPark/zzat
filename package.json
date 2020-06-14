@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.10.1",
-    "@nuxtjs/dotenv": "^1.4.1",
     "@zzopark/validation": "^1.2.13",
     "cross-env": "^7.0.2",
     "express": "^4.17.1",
@@ -28,6 +27,7 @@
   "devDependencies": {
     "@mdi/font": "^5.1.45",
     "@mdi/js": "^5.1.45",
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/eslint-config": "^2.0.2",
     "@nuxtjs/eslint-module": "^1.2.0",
     "@nuxtjs/vuetify": "^1.11.0",

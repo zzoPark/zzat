@@ -34,10 +34,17 @@ module.exports = {
   plugins: [ '~/plugins/head.js', '~/plugins/moment.js' ],
 
   // Modules only required during development and build time
-  buildModules: ['@nuxtjs/eslint-module', '@nuxtjs/vuetify'],
+  buildModules: [
+    '@nuxtjs/dotenv',
+    '@nuxtjs/eslint-module', 
+    '@nuxtjs/vuetify'
+  ],
 
   // Modules required
-  modules: ['@nuxtjs/axios', '@nuxtjs/dotenv', '@zzopark/validation'],
+  modules: [
+    '@nuxtjs/axios',
+    '@zzopark/validation'
+  ],
 
   /*
    ** Axios module configuration
